@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "html2canvas": "^1.0.0-rc.7",
+    "jspdf": "^2.3.1",
+    "orgchart": "^3.1.1",
+    "scrollreveal": "^4.0.9"
+  }
+}

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -o-box-sizing: border-box;
+            box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: auto;
+        }
+
+        .slider {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            position: relative
+        }
+
+        .slider ul {
+            width: calc(100% * 9);
+            height: 100%;
+        }
+
+        .slider ul li {
+            width: calc(100% / 9);
+            height: 100%;
+            float: left;
+            font-size: 50px;
+            color: #086fb1;
+            text-align: center;
+            line-height: 300px;
+            overflow-x: hidden
+        }
+
+        .slider:before {
+            content: "Pleni Saúde";
+            position: absolute;
+            width: 100%;
+            color: rgba(255, 255, 255, .5);
+            font-size: 40px;
+            text-align: center;
+            padding-top: 5vh;
+        }
+
+        .slider ul li:first-of-type,
+        .slider ul li:nth-of-type(8) {
+            background: #009688
+        }
+
+        .slider ul li:nth-of-type(3) {
+            background: #FF9800
+        }
+
+        .slider ul li:nth-of-type(4) {
+            background: #009688
+        }
+
+        .slider ul li:nth-of-type(5) {
+            background: #FF9800
+        }
+
+        .slider ul li:nth-of-type(6) {
+            background: #009688
+        }
+
+        .slider ul li:nth-of-type(7) {
+            background: #009688
+        }
+
+        .slider ul li:last-of-type,
+        .slider ul li:nth-of-type(2) {
+            background: #2196F3
+        }
+
+        .slider ol,
+        .slider .control .fa {
+            position: absolute;
+            z-index: 999999
+        }
+
+        .slider ol {
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 99999
+        }
+
+        .slider ol li {
+            display: inline-block;
+            cursor: pointer
+        }
+
+        .slider ol li:hover .fa:before,
+        .slider ol li.active .fa:before {
+            content: "\f111"
+        }
+
+        .slider .control .fa:first-of-type {
+            left: 10px;
+            top: 33%
+        }
+
+        .slider .control .fa:last-of-type {
+            right: 10px;
+            top: 33%
+        }
+
+        .slider .control .fa {
+            cursor: pointer
+        }
+
+        .slider .fa {
+            text-shadow: 0 0 5px #333;
+            color: #fff
+        }
+
+        .project {
+            width: 700px;
+            height: 450px;
+            margin: 20vh auto 0;
+            position: relative
+        }
+
+        .project .screen,
+        .project .tablet,
+        .project .mobile {
+            border: 2px solid #555;
+            border-radius: 15px;
+            background: #222;
+            padding: 25px;
+            background-size: cover;
+            transition: all .5s ease-in-out
+        }
+
+        .project .tablet:before,
+        .project .mobile:before {
+            content: "";
+            display: block;
+            border-radius: 50%;
+            border: 1px solid #333;
+            box-shadow: 0 0 2px #444;
+            width: 15px;
+            height: 15px;
+            position: absolute;
+        }
+
+        .project .tablet:before {
+            bottom: 3px;
+            left: 47%
+        }
+
+        .project .mobile:before {
+            bottom: 7px;
+            left: 40%
+        }
+
+        .project .screen {
+            width: 600px;
+            height: 400px;
+            margin: auto;
+            position: relative
+        }
+
+        .project .tablet {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 250px;
+            height: 300px
+        }
+
+        .project .mobile {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 125px;
+            height: 225px;
+            padding: 30px 7px
+        }
+
+        .project .screen:hover {
+            z-index: 99999;
+        }
+
+        .project .screen:hover~.mobile {
+            left: -80px
+        }
+
+        .project .screen:hover~.tablet {
+            right: -80px
+        }
+
+        .project .screen:hover~.mobile,
+        .project .screen:hover~.tablet {
+            bottom: 80px;
+            opacity: .5;
+            transform: scale(0.8)
+        }
+
+        .project .screen:hover,
+        .project .mobile:hover,
+        .project .tablet:hover {
+            transform: scale(1.1)
+        }
+
+        .project .mobile:hover~.screen,
+        .project .tablet:hover~.screen {
+            opacity: 0.9
+        }
+
+        .project .view {
+            width: 100%;
+            height: 100%;
+            background-position: top;
+            background-size: cover;
+            transition: all .5s ease-in-out
+        }
+
+        .project .screen:hover .view,
+        .project .tablet:hover .view,
+        .project .mobile:hover .view {
+            background-position: bottom;
+            transition: all 3s ease-in-out
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="slider">
+            <ul>
+                <li>
+                    <div class="project">
+                        <div class="screen">
+                            <div class="view" data-second="8"
+                                data-image="http://media02.hongkiat.com/psd-website-templates/1-free-website-psd-templates.jpg">
+                            </div>
+                        </div>
+                        <div class="tablet">
+                            <div class="view" data-second="8"
+                                data-image="http://media02.hongkiat.com/psd-website-templates/1-free-website-psd-templates.jpg">
+                            </div>
+                        </div>
+                        <div class="mobile">
+                            <div class="view" data-second="8"
+                                data-image="http://media02.hongkiat.com/psd-website-templates/1-free-website-psd-templates.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="project">
+                        <div class="screen">
+                            <div class="view" data-second="8"
+                                data-image="https://devnet.kentico.com/getattachment/3f7725e9-4378-4383-a83a-649445f4d1b4/Kentico-Responsive-Website-Template-For-Healthcare">
+                            </div>
+                        </div>
+                        <div class="tablet">
+                            <div class="view" data-second="8"
+                                data-image="https://devnet.kentico.com/getattachment/3f7725e9-4378-4383-a83a-649445f4d1b4/Kentico-Responsive-Website-Template-For-Healthcare">
+                            </div>
+                        </div>
+                        <div class="mobile">
+                            <div class="view" data-second="8"
+                                data-image="https://devnet.kentico.com/getattachment/3f7725e9-4378-4383-a83a-649445f4d1b4/Kentico-Responsive-Website-Template-For-Healthcare">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="project">
+                        <div class="screen">
+                            <div class="view" data-second="8"
+                                data-image="http://www.webtechelp.net/wp-content/uploads/2014/09/Hope-Center.jpg"></div>
+                        </div>
+                        <div class="tablet">
+                            <div class="view" data-second="8"
+                                data-image="http://www.webtechelp.net/wp-content/uploads/2014/09/Hope-Center.jpg"></div>
+                        </div>
+                        <div class="mobile">
+                            <div class="view" data-second="8"
+                                data-image="http://www.webtechelp.net/wp-content/uploads/2014/09/Hope-Center.jpg"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="project">
+                        <div class="screen">
+                            <div class="view" data-second="8"
+                                data-image="http://media02.hongkiat.com/psd-website-templates/1-free-website-psd-templates.jpg">
+                            </div>
+                        </div>
+                        <div class="tablet">
+                            <div class="view" data-second="8"
+                                data-image="http://media02.hongkiat.com/psd-website-templates/1-free-website-psd-templates.jpg">
+                            </div>
+                        </div>
+                        <div class="mobile">
+                            <div class="view" data-second="8"
+                                data-image="http://media02.hongkiat.com/psd-website-templates/1-free-website-psd-templates.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="project">
+                        <div class="screen">
+                            <div class="view" data-second="8"
+                                data-image="https://devnet.kentico.com/getattachment/3f7725e9-4378-4383-a83a-649445f4d1b4/Kentico-Responsive-Website-Template-For-Healthcare">
+                            </div>
+                        </div>
+                        <div class="tablet">
+                            <div class="view" data-second="8"
+                                data-image="https://devnet.kentico.com/getattachment/3f7725e9-4378-4383-a83a-649445f4d1b4/Kentico-Responsive-Website-Template-For-Healthcare">
+                            </div>
+                        </div>
+                        <div class="mobile">
+                            <div class="view" data-second="8"
+                                data-image="https://devnet.kentico.com/getattachment/3f7725e9-4378-4383-a83a-649445f4d1b4/Kentico-Responsive-Website-Template-For-Healthcare">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="project">
+                        <div class="screen">
+                            <div class="view" data-second="8"
+                                data-image="http://www.webtechelp.net/wp-content/uploads/2014/09/Hope-Center.jpg"></div>
+                        </div>
+                        <div class="tablet">
+                            <div class="view" data-second="8"
+                                data-image="http://www.webtechelp.net/wp-content/uploads/2014/09/Hope-Center.jpg"></div>
+                        </div>
+                        <div class="mobile">
+                            <div class="view" data-second="8"
+                                data-image="http://www.webtechelp.net/wp-content/uploads/2014/09/Hope-Center.jpg"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="project">
+                        <div class="screen">
+                            <div class="view" data-second="8"
+                                data-image="http://media02.hongkiat.com/psd-website-templates/1-free-website-psd-templates.jpg">
+                            </div>
+                        </div>
+                        <div class="tablet">
+                            <div class="view" data-second="8"
+                                data-image="http://media02.hongkiat.com/psd-website-templates/1-free-website-psd-templates.jpg">
+                            </div>
+                        </div>
+                        <div class="mobile">
+                            <div class="view" data-second="8"
+                                data-image="http://media02.hongkiat.com/psd-website-templates/1-free-website-psd-templates.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="project">
+                        <div class="screen">
+                            <div class="view" data-second="8"
+                                data-image="https://devnet.kentico.com/getattachment/3f7725e9-4378-4383-a83a-649445f4d1b4/Kentico-Responsive-Website-Template-For-Healthcare">
+                            </div>
+                        </div>
+                        <div class="tablet">
+                            <div class="view" data-second="8"
+                                data-image="https://devnet.kentico.com/getattachment/3f7725e9-4378-4383-a83a-649445f4d1b4/Kentico-Responsive-Website-Template-For-Healthcare">
+                            </div>
+                        </div>
+                        <div class="mobile">
+                            <div class="view" data-second="8"
+                                data-image="https://devnet.kentico.com/getattachment/3f7725e9-4378-4383-a83a-649445f4d1b4/Kentico-Responsive-Website-Template-For-Healthcare">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ol>
+                <li class="active"><i class="fa fa-circle-o"></i></li>
+                <li><i class="fa fa-circle-o"></i></li>
+                <li><i class="fa fa-circle-o"></i></li>
+                <li><i class="fa fa-circle-o"></i></li>
+                <li><i class="fa fa-circle-o"></i></li>
+                <li><i class="fa fa-circle-o"></i></li>
+                <li><i class="fa fa-circle-o"></i></li>
+            </ol>
+            <div class="control">
+                <i class="fa fa-angle-left fa-5x"></i>
+                <i class="fa fa-angle-right fa-5x"></i>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+
+<script>
+    $(function () {
+        // All Variable =======================================================================
+        var body = $('body'),
+            slider = $(".slider"),
+            sliderUl = slider.find("ul"),
+            sliderUlLi = sliderUl.find("li"),
+            sliderOl = slider.find("ol"),
+            sliderOlLi = sliderOl.find("li"),
+            controlFa = $(".control .fa"),
+            sliderTime = 1000,
+            sliderWait = 5000,
+            clickHere = "yes click",
+            autoPlay;
+
+        // All Functions =====================================================================
+        sliderUl.append("<li>" + sliderUlLi.first().html() + "</li>");
+        sliderUl.prepend("<li>" + sliderUlLi.last().html() + "</li>");
+
+        function runSlider() {
+            if (clickHere === "yes click") {
+                clickHere = "no click";
+                sliderUl.animate({
+                    marginLeft: -sliderUlLi.width() * ($(".slider .active").index() + 1)
+                }, sliderTime, function () { clickHere = "yes click"; });
+            }
+        }
+        function addActive(param) {
+            if (clickHere === "yes click") {
+                param.addClass("active").siblings("li").removeClass("active");
+            }
+        }
+
+        // Click Point =======================================================================
+        sliderOlLi.on("click", function () {
+            addActive($(this));
+            runSlider();
+        });
+
+        // Click Arrow Left
+        controlFa.first().on("click", function () {
+            if ($(".slider .active").is(":first-of-type")) {
+                addActive(sliderOlLi.last());
+                if (clickHere === "yes click") {
+                    clickHere = "no click";
+                    sliderUl.animate({
+                        marginLeft: "+=" + sliderUlLi.first().width()
+                    }, sliderTime, function () {
+                        sliderUl.css("margin-left", -sliderUlLi.width() * ($(".slider .active").index() + 1));
+                        clickHere = "yes click";
+                    });
+                }
+            } else {
+                addActive($(".slider .active").prev("li"));
+                runSlider();
+            }
+        });
+
+        // Click Arrow Right
+        controlFa.last().on("click", function () {
+            if ($(".slider .active").is(":last-of-type")) {
+                addActive(sliderOlLi.first());
+                if (clickHere === "yes click") {
+                    clickHere = "no click";
+                    sliderUl.animate({
+                        marginLeft: "-=" + sliderUlLi.first().width()
+                    }, sliderTime, function () {
+                        sliderUl.css("margin-left", -sliderUlLi.width() * ($(".slider .active").index() + 1));
+                        clickHere = "yes click";
+                    });
+                }
+            } else {
+                addActive($(".slider .active").next("li"));
+                runSlider();
+            }
+        });
+
+        // Start Set =======================================================================
+        sliderOlLi.first().click();
+
+        // Keyboard ========================================================================
+        $("body").keydown(function (e) {
+            if (e.keyCode == 37) { // left
+                controlFa.first().click();
+            } else if (e.keyCode == 39) { // right
+                controlFa.last().click();
+            }
+        });
+
+        // Auto Run Slider ==============================================================
+        function autoRunSlider() {
+            if (body.css('direction') === 'ltr') {
+                autoPlay = setInterval(function () { controlFa.last().click(); }, sliderWait);
+            } else if (body.css('direction') === 'rtl') {
+                autoPlay = setInterval(function () { controlFa.first().click(); }, sliderWait);
+            }
+        }
+        autoRunSlider();
+
+        // When Hover fa ==============================================================
+        slider.find('.fa').on('mouseenter', function () { clearInterval(autoPlay); });
+        slider.find('.fa').on('mouseleave', function () { autoRunSlider(); });
+
+        // veiw =============================================================================
+        $('.project .view').each(function () {
+            $(this).css("background-image", "url(" + $(this).data("image") + ")");
+        });
+        $('.project .screen, .project .tablet, .project .mobile').hover(function () {
+            $(this).find('.view').css('transition', 'all ' + $(this).find('.view').data('second') + 's ease-in-out');
+        }, function () {
+            $(this).find('.view').css('transition', 'all 2s ease-in-out');
+        });
+
+    });
+
+// Em An
+// 8-2017
+// https://codepen.io/collection/AGNJNB
+</script>
+
+</html>

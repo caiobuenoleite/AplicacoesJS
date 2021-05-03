@@ -1,0 +1,187 @@
+{
+    "name": "Protocolo Diabetes Mellitus",
+    "children": [
+        {
+            "name": "Pessoas com mais de 18 anos?",
+            "children": [
+                {
+                    "name": "Sim",
+                    "children": [
+                        {
+                            "name": "Sintomatologia Inequívoca de Hiperglicemia?",
+                            "children": [
+                                {
+                                    "name": "Sim",
+                                    "children": [
+                                        {
+                                            "name": "Glicemia ao acaso > ou =200 mg/dl",
+                                            "children": [
+                                                {
+                                                    "name": "Não"
+                                                },
+                                                {
+                                                    "name": "Sim",
+                                                    "children": [
+                                                        {
+                                                            "name": "Diagnóstico de DM e encaminhar para a consulta médica para definir tratamento e acompanhamento pela equipe"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Não",
+                                    "children": [
+                                        {
+                                            "name": "Possui critério para rastreamento de DM2**?",
+                                            "children": [
+                                                {
+                                                    "name": "Sim",
+                                                    "children": [
+                                                        {
+                                                            "name": "Hemoglobona Glicada",
+                                                            "children": [
+                                                                {
+                                                                    "name": "Menor que 5,7% normoglicemia"
+                                                                },
+                                                                {
+                                                                    "name": "5.7 até 6.5 % pré diabético ou risco aumentado para diabetes"
+                                                                },
+                                                                {
+                                                                    "name": "> ou = a 6,5% Diabetes"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "name": "Glicemia em jejum (mg/dl)",
+                                                            "children": [
+                                                                {
+                                                                    "name": "menor que 100 normoglicemia"
+                                                                },
+                                                                {
+                                                                    "name": "maior ou igual a 100 e menor que 126 pré diabético ou risco aumentan do de DM"
+                                                                },
+                                                                {
+                                                                    "name": "maior ou igual a 126 DM "
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "name": "Glicose 2h após sobrecarga com 75g de glicose (mg/dl)",
+                                                            "children": [
+                                                                {
+                                                                    "name": "menor que 140 Normogl icemia"
+                                                                },
+                                                                {
+                                                                    "name": "maior ou igual a 140 e menor que 200 pré diabetes ou risco aumentado"
+                                                                },
+                                                                {
+                                                                    "name": "maior ou igual a 200 DM"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "name": "Não",
+                                                    "children": [
+                                                        {
+                                                            "name": "Encaminhar para Consulta de Enfermagem para orieentação de estilos de vida saudável"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Gestante",
+                                    "children": [
+                                        {
+                                            "name": "1º Trimestre",
+                                            "children": [
+                                                {
+                                                    "name": "Sim",
+                                                    "children": [
+                                                        {
+                                                            "name": "Seguir rastreio de DM prévio"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "name": "Não",
+                                                    "children": [
+                                                        {
+                                                            "name": "Se Glicemia de Jejum < 92 mg/dl submeter a TOTG entre 24 e 28 sem.",
+                                                            "children": [
+                                                                {
+                                                                    "name": "Não"
+                                                                },
+                                                                {
+                                                                    "name": "Sim",
+                                                                    "children": [
+                                                                        {
+                                                                            "name": "O diagnóstico de DMG é estabelecido quando no mínimo um dos valores a seguir encontra-se alterado",
+                                                                            "children": [
+                                                                                {
+                                                                                    "name": "Glicemia em jejum > ou = 92mg/dl Glicemia 1 h após sobrecarga > ou = 180mg/dl Glicemia 2h após sobregarga > ou = 153 mg/dl",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "name": "Não"
+                                                                                        },
+                                                                                        {
+                                                                                            "name": "Sim",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "name": "Encaminhar ao Pré-natal de Alto Risco"
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Se glicemia entre 92 e 126 mg/dl em qualquer fase da gestação",
+                                            "children": [
+                                                {
+                                                    "name": "DMG",
+                                                    "children": [
+                                                        {
+                                                            "name": "Não"
+                                                        },
+                                                        {
+                                                            "name": "Sim",
+                                                            "children": [
+                                                                {
+                                                                    "name": "Encaminhar ao Pré-natal de Alto Risco"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Não"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+
+<style>
+    .node {
+        cursor: pointer;
+    }
+
+    .node circle {
+        fill: #fff;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+    }
+
+    .node text {
+        font: 24px sans-serif;
+        text-anchor: start;
+        text-align: justify;
+        white-space: pre-line;
+        max-width: fit-content;
+    }
+
+    .text {
+        word-wrap: break-word;
+    }
+
+    .link {
+        fill: none;
+        stroke: #ccc;
+        stroke-width: 1.5px;
+    }
+</style>
+
+<body>
+
+    <!-- load the d3.js library -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+
+    <script>
+        // First check this out : https://medium.com/@c_behrens/enter-update-exit-6cafc6014c36 to understand how enter, update, exit works
+
+        // Tree already in proper format
+        var treeData =
+        {
+            "id": "teste_id",
+            "name": "Protocolo Diabetes Mellitus",
+            "children": [
+                {
+                    "name": "Pessoas com mais de 18 anos?",
+                    "children": [
+                        {
+                            "name": "Sim",
+                            "children": [
+                                {
+                                    "name": "Sintomatologia Inequívoca de Hiperglicemia?",
+                                    "children": [
+                                        {
+                                            "name": "Sim",
+                                            "children": [
+                                                {
+                                                    "name": "Glicemia ao acaso > ou =200 mg/dl",
+                                                    "children": [
+                                                        {
+                                                            "name": "Não"
+                                                        },
+                                                        {
+                                                            "name": "Sim",
+                                                            "children": [
+                                                                {
+                                                                    "name": "Diagnóstico de DM e encaminhar para a consulta médica para definir tratamento e acompanhamento pela equipe"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Não",
+                                            "children": [
+                                                {
+                                                    "name": "Possui critério para rastreamento de DM2**?",
+                                                    "children": [
+                                                        {
+                                                            "name": "Sim",
+                                                            "children": [
+                                                                {
+                                                                    "name": "Hemoglobona Glicada",
+                                                                    "children": [
+                                                                        {
+                                                                            "name": "Menor que 5,7% normoglicemia"
+                                                                        },
+                                                                        {
+                                                                            "name": "5.7 até 6.5 % pré diabético ou risco aumentado para diabetes"
+                                                                        },
+                                                                        {
+                                                                            "name": "> ou = a 6,5% Diabetes"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "name": "Glicemia em jejum (mg/dl)",
+                                                                    "children": [
+                                                                        {
+                                                                            "name": "menor que 100 normoglicemia"
+                                                                        },
+                                                                        {
+                                                                            "name": "maior ou igual a 100 e menor que 126 pré diabético ou risco aumentan do de DM"
+                                                                        },
+                                                                        {
+                                                                            "name": "maior ou igual a 126 DM "
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "name": "Glicose 2h após sobrecarga com 75g de glicose (mg/dl)",
+                                                                    "children": [
+                                                                        {
+                                                                            "name": "menor que 140 Normogl icemia"
+                                                                        },
+                                                                        {
+                                                                            "name": "maior ou igual a 140 e menor que 200 pré diabetes ou risco aumentado"
+                                                                        },
+                                                                        {
+                                                                            "name": "maior ou igual a 200 DM"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "name": "Não",
+                                                            "children": [
+                                                                {
+                                                                    "name": "Encaminhar para Consulta de Enfermagem para orieentação de estilos de vida saudável"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Gestante",
+                                            "children": [
+                                                {
+                                                    "name": "1º Trimestre",
+                                                    "children": [
+                                                        {
+                                                            "name": "Sim",
+                                                            "children": [
+                                                                {
+                                                                    "name": "Seguir rastreio de DM prévio"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "name": "Não",
+                                                            "children": [
+                                                                {
+                                                                    "name": "Se Glicemia de Jejum < 92 mg/dl submeter a TOTG entre 24 e 28 sem.",
+                                                                    "children": [
+                                                                        {
+                                                                            "name": "Não"
+                                                                        },
+                                                                        {
+                                                                            "name": "Sim",
+                                                                            "children": [
+                                                                                {
+                                                                                    "name": "O diagnóstico de DMG é estabelecido quando no mínimo um dos valores a seguir encontra-se alterado",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "name": "Glicemia em jejum > ou = 92mg/dl Glicemia 1 h após sobrecarga > ou = 180mg/dl Glicemia 2h após sobregarga > ou = 153 mg/dl",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "name": "Não"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "Sim",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "name": ["Encaminhar ao Pré-natal de Alto Risco"]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "name": "Se glicemia entre 92 e 126 mg/dl| em qualquer fase da gestação",
+                                                    "children": [
+                                                        {
+                                                            "name": "DMG",
+                                                            "children": [
+                                                                {
+                                                                    "name": "Não"
+                                                                },
+                                                                {
+                                                                    "name": "Sim",
+                                                                    "children": [
+                                                                        {
+                                                                            "name": [
+                                                                                "Encaminhar ao Pré-natal|de Alto Risco"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Não"
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // Setup SVG Element - Start
+        var margin = { top: 60, right: 20, bottom: 30, left: 20 },
+            width = 1600 - margin.left - margin.right,
+            height = 2000 - margin.top - margin.bottom;
+
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", width + margin.right + margin.left)
+            .attr("height", height + margin.top + margin.bottom)
+
+        var g = svg.append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        // Setup SVG Element - End
+
+
+        var i = 0,
+            duration = 750,
+            root;
+
+        // Setup tree
+
+        var treemap = d3.tree()
+            .size([width, height]);
+
+        // Get the root
+
+        root = d3.hierarchy(treeData, function (d) { return d.children; });
+
+        root.x0 = 0;
+        root.y0 = width / 3;
+
+        // Collapse all children, except root's
+
+        root.children.forEach(collapse);
+        // root.children = null;
+
+        // Let's draw the tree
+        draw(root);
+
+        // console.log(root);
+
+        function draw(source) {
+
+            // Get the treemap, so that we can get nodes and links
+            var treeData = treemap(root);
+
+            // Get nodes and links
+            var nodes = treeData.descendants(),
+                links = treeData.descendants().slice(1);
+
+            // Adjust the position of y of each node. Comment out just this line and see how it's different  
+            nodes.forEach(function (d) { d.y = d.depth * 125 });
+
+            // Add unique id for each node, else it won't work
+            var node = g.selectAll('g.node')
+                .data(nodes, function (d) { return d.id || (d.id = ++i); });
+
+
+            // Let's append all enter nodes
+            var nodeEnter = node
+                .enter()
+                .append('g')
+                .attr('class', 'node')
+                .attr("transform", function (d) {
+                    return "translate(" + source.x0 + "," + source.y0 + ")";
+                })
+                .on('click', click);
+
+            // Add circle for each enter node, but keep the radius 0
+
+            nodeEnter.append('circle')
+                .attr('class', 'node')
+                .attr('r', 1e-6)
+                .style("fill", function (d) {
+                    return d._children ? "lightsteelblue" : "#fff"; // Posso mudar as cores aqui
+                });
+
+            // Add text
+
+            nodeEnter.append('text')
+                .attr("dy", ".35em")
+                .attr("x", function (d) {
+                    return d.children || d._children ? -40 : -40;
+                })
+                .attr("y", function (d) {
+                    return d.children || d._children ? -40 : 40;
+                })
+                .attr("text-anchor", function (d) {
+                    return d.children || d._children ? "end" : "start";
+                })
+                .text(function (d) {
+
+                    return wrap(d.data.name, 300);
+                })
+            // wrap(d3.selectAll('.newText'), 200);
+            // wrap(d3.selectAll('text'), 300);
+
+
+
+
+            // https://github.com/d3/d3-selection/issues/86 to check what merge does
+            var nodeUpdate = nodeEnter.merge(node);
+
+            // Do transition of node to appropriate position
+            nodeUpdate.transition()
+                .duration(duration)
+                .attr("transform", function (d) {
+                    return "translate(" + d.x + "," + d.y + ")";
+                });
+
+
+            // Let's update the radius now, which was previously zero.
+
+            nodeUpdate.select('circle.node')
+                .attr('r', 30)
+                .style("fill", function (d) {
+                    return d._children ? "lightsteelblue" : "#fff";
+                })
+                .attr('cursor', 'pointer');
+
+            // nodeUpdate.select("text").call(wrap, 250); // <++++++++++ wrap it!
+
+            // Let's work on exiting nodes
+
+            // Remove the node
+
+            var nodeExit = node.exit().transition()
+                .duration(duration)
+                .attr("transform", function (d) {
+                    return "translate(" + source.x + "," + source.y + ")";
+                })
+                .remove();
+
+            // On exit reduce the node circles size to 0
+            nodeExit.select('circle')
+                .attr('r', 1e-6);
+
+            // On exit reduce the opacity of text labels
+            nodeExit.select('text')
+                .style('fill-opacity', 1e-6);
+
+
+            // Let's draw links
+
+            var link = g.selectAll('path.link')
+                .data(links, function (d) { return d.id; });
+
+            // Work on enter links, draw straight lines
+
+            var linkEnter = link.enter().insert('path', "g")
+                .attr("class", "link")
+                .attr('d', function (d) {
+                    var o = { x: source.x0, y: source.y0 }
+                    return diagonal(o, o)
+                });
+
+            // UPDATE
+            var linkUpdate = linkEnter.merge(link);
+
+            // Transition back to the parent element position, now draw a link from node to it's parent
+            linkUpdate.transition()
+                .duration(duration)
+                .attr('d', function (d) { return diagonal(d, d.parent) });
+
+            // Remove any exiting links
+            var linkExit = link.exit().transition()
+                .duration(duration)
+                .attr('d', function (d) {
+                    var o = { x: source.x, y: source.y }
+                    return diagonal(o, o)
+                })
+                .remove();
+
+            // Store the old positions for transition.
+            nodes.forEach(function (d) {
+                d.x0 = d.x;
+                d.y0 = d.y;
+            });
+
+        }
+
+        function diagonal(s, d) {
+
+            // Here we are just drawing lines, we can also draw curves, comment out below path for it.
+
+            //     var path = `M ${s.x} ${s.y}
+            //   L ${d.x} ${d.y}`;
+
+            var path = `M ${s.x} ${s.y}
+                    C ${(s.x + d.x) / 2} ${s.y},
+                      ${(s.x + d.x) / 2} ${d.y},
+                      ${d.x} ${d.y}`
+
+            return path
+        }
+
+        function collapse(d) {
+            if (d.children) {
+                d._children = d.children
+                d._children.forEach(collapse)
+                d.children = null
+            }
+        }
+        var textclicked = ""
+
+        function click(d) {
+            if (d.children) {
+                d._children = d.children;
+                d.children = null;
+                alert(d.data.name)
+            } else {
+                d.children = d._children;
+                d._children = null;
+            }
+
+            // If d has a parent, collapse other children of that parent
+            if (d.parent) {
+                d.parent.children.forEach(function (element) {
+                    if (d !== element) {
+                        collapse(element);
+                    }
+                });
+            }
+            draw(d);
+        }
+
+
+
+        function wrap(text, width) {
+
+            // if (text.text() === textclicked) {
+            var text = d3.select(this),
+                words = text.text().split(/\s+/).reverse(),
+                word,
+                espaco = " ",
+                line = [],
+                lineNumber = 0,
+                lineHeight = 1.1, // ems
+                y = text.attr("y"),
+                dy = parseFloat(text.attr("dy")) / 2,
+                tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+            while (word = words.pop()) {
+                line.push(word);
+                tspan.text(line.join(" "));
+                if (tspan.node().getComputedTextLength() > width) {
+                    line.pop();
+                    tspan.text(line.join(" "));
+                    line = [word, " "];
+                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                }
+            }
+            // }
+
+        }
+
+
+    </script>
+</body>

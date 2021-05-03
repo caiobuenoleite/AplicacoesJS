@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLENI</title>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <style>
+        .js-plotly-plot .plotly svg a {
+            fill: rgb(230 234 241);
+        }
+
+        h1 {
+            font-family: montserrat, sans-serif;
+            color: #31aeb5;
+            text-align: center !important;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        AVALIAÇÃO DE ANSIEDADE
+    </h1>
+    <div id="myDiv"></div>
+</body>
+<script>
+    var data = [{
+        type: "sunburst",
+        ids: [
+            'Pergunta',
+            'A',
+            'B',
+            'Sobra',
+            'Sobra'
+        ],
+        labels: [
+            'Você tem se<br>preocupado demais?',
+            'Não',
+            'Sim',
+        ],
+        parents: [
+            "",
+            'Pergunta',
+            'Pergunta',
+            'A',
+            'B'
+        ],
+        outsidetextfont: { size: 20, color: "#000" },
+        insidetextfont: { color: "#FFF", size: 20 },
+        leaf: { opacity: 0.4 },
+        marker: {
+            line: { width: 5 },
+        },
+        maxdepth: 2,
+        insidetextorientation: 'horizontal'
+    }];
+    var layout = {
+        margin: { l: 0, r: 0, b: 0, t: 0 },
+        sunburstcolorway: ["#00a5a1", "#666666", "#3182bd", "#00e9e3", "#e6550d", "#9ecae1", "#fdae6b", "#9ecae1",
+            "#fdae6b", "#deebf7", "#deebf7", "#deebf7", "#fee6ce"],
+        font: {
+            // family: 'font-family:questrial,sans-serif',
+        },
+        transition: {
+            duration: 100,
+        }
+        // width: 500,
+        // height: 500
+    };
+
+    var i = 0;
+    var valorScore = 0
+    var lastClicked = 0;
+    Plotly.newPlot('myDiv', data, layout, { displayModeBar: false })
+
+    function MyPlotClick(evt) {
+        if (evt.points[0].pointNumber === 0) {
+        } else {
+            valorScore = valorScore + evt.points[0].pointNumber - 1
+            var timeNow = (new Date()).getTime()
+            if (timeNow > (lastClicked + 1000)) {
+                if (i === 0) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+                        var data2 = [{
+                            type: "sunburst",
+                            ids: [
+                                'Pergunta',
+                                'A',
+                                'B',
+                                'Sobra',
+                                'Sobra'
+                            ],
+                            labels: [
+                                'Você tem se sentido<br>esgotado e tenso?',
+                                'Não',
+                                'Sim',
+                            ],
+                            parents: [
+                                "",
+                                'Pergunta',
+                                'Pergunta',
+                                'A',
+                                'B'
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal'
+                        }];
+                        Plotly.newPlot('myDiv', data2, layout, { displayModeBar: false })
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 1) {
+
+                    setTimeout(() => {
+                        // alert(valorScore)
+                        var data2 = [{
+                            type: "sunburst",
+                            ids: [
+                                'Pergunta',
+                                'A',
+                                'B',
+                                'Sobra',
+                                'Sobra'
+                            ],
+                            labels: [
+                                'Você tem se sentido muito<br>irritado(a) ou com<br>“problema nos nervos”?',
+                                'Não',
+                                'Sim',
+                            ],
+                            parents: [
+                                "",
+                                'Pergunta',
+                                'Pergunta',
+                                'A',
+                                'B'
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal'
+                        }];
+                        Plotly.newPlot('myDiv', data2, layout, { displayModeBar: false })
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+
+                } else if (i === 2) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+                        var data2 = [{
+                            type: "sunburst",
+                            ids: [
+                                'Pergunta',
+                                'A',
+                                'B',
+                                'Sobra',
+                                'Sobra'
+                            ],
+                            labels: [
+                                'Você tem tido<br>dificuldade<br>em relaxar? ',
+                                'Não',
+                                'Sim',
+                            ],
+                            parents: [
+                                "",
+                                'Pergunta',
+                                'Pergunta',
+                                'A',
+                                'B'
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal'
+                        }];
+                        Plotly.newPlot('myDiv', data2, layout, { displayModeBar: false })
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 3) {
+                    if (valorScore <= 0) {
+                        setTimeout(() => {
+                            redirect2()
+                        }, 1000);
+                    } else if (valorScore > 0) {
+                        setTimeout(() => {
+                            // alert(valorScore)
+                            var data2 = [{
+                                type: "sunburst",
+                                ids: [
+                                    'Pergunta',
+                                    'A',
+                                    'B',
+                                    'Sobra',
+                                    'Sobra'
+                                ],
+                                labels: [
+                                    'Estes problemas têm <br>prejudicado sua qualidade<br>de vida e relações<br>com outras pessoas?',
+                                    'Não',
+                                    'Sim',
+                                ],
+                                parents: [
+                                    "",
+                                    'Pergunta',
+                                    'Pergunta',
+                                    'A',
+                                    'B'
+                                ],
+                                outsidetextfont: { size: 20, color: "#000" },
+                                insidetextfont: { color: "#FFF", size: 20 },
+                                leaf: { opacity: 0.4 },
+                                marker: {
+                                    line: { width: 5 },
+                                },
+                                maxdepth: 2,
+                                insidetextorientation: 'horizontal'
+                            }];
+                            Plotly.newPlot('myDiv', data2, layout, { displayModeBar: false })
+                            myDiv.on('plotly_click', MyPlotClick);
+                        }, 1000);
+                    }
+                } else if (i === 4) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+                        var data2 = [{
+                            type: "sunburst",
+                            ids: [
+                                'Pergunta',
+                                'A',
+                                'B',
+                                'Sobra',
+                                'Sobra'
+                            ],
+                            labels: [
+                                'Você tem dormido mal<br> ou dificuldade<br>para dormir? ',
+                                'Não',
+                                'Sim',
+                            ],
+                            parents: [
+                                "",
+                                'Pergunta',
+                                'Pergunta',
+                                'A',
+                                'B'
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal'
+                        }];
+                        Plotly.newPlot('myDiv', data2, layout, { displayModeBar: false })
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 5) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+                        var data2 = [{
+                            type: "sunburst",
+                            ids: [
+                                'Pergunta',
+                                'A',
+                                'B',
+                                'Sobra',
+                                'Sobra'
+                            ],
+                            labels: [
+                                'Você tem sentido<br>dor de cabeça<br>, no pescoço ou<br>mal-estar na cabeça? ',
+                                'Não',
+                                'Sim',
+                            ],
+                            parents: [
+                                "",
+                                'Pergunta',
+                                'Pergunta',
+                                'A',
+                                'B'
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal'
+                        }];
+                        Plotly.newPlot('myDiv', data2, layout, { displayModeBar: false })
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 6) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+                        var data2 = [{
+                            type: "sunburst",
+                            ids: [
+                                'Pergunta',
+                                'A',
+                                'B',
+                                'Sobra',
+                                'Sobra'
+                            ],
+                            labels: [
+                                'Você tem sentido tontura,<br>suor frio, diarreia,<br>formigamentos,<br>desconforto no estômago,<br>batedeira etc.?',
+                                'Não',
+                                'Sim',
+                            ],
+                            parents: [
+                                "",
+                                'Pergunta',
+                                'Pergunta',
+                                'A',
+                                'B'
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal'
+                        }];
+                        Plotly.newPlot('myDiv', data2, layout, { displayModeBar: false })
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 7) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+                        var data2 = [{
+                            type: "sunburst",
+                            ids: [
+                                'Pergunta',
+                                'A',
+                                'B',
+                                'Sobra',
+                                'Sobra'
+                            ],
+                            labels: [
+                                'Você está preocupado<br>com sua saúde? ',
+                                'Não',
+                                'Sim',
+                            ],
+                            parents: [
+                                "",
+                                'Pergunta',
+                                'Pergunta',
+                                'A',
+                                'B'
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal'
+                        }];
+                        Plotly.newPlot('myDiv', data2, layout, { displayModeBar: false })
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 8) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+                        if (valorScore <= 4) {
+                            redirect3()
+                        } else if (valorScore <= 7) {
+                            redirect4()
+                        } else if (valorScore <= 9) {
+                            redirect5()
+                        }
+                    }, 1000);
+                }
+                i = i + 1;
+            } else {
+                alert('Please wait at least 2 seconds between clicks!');
+            }
+
+            lastClicked = timeNow;
+        }
+
+    }
+
+
+
+    function redirect2() {
+        window.location.href = '/resultado'
+    }
+    function redirect3() {
+        window.location.href = '/resultadof1'
+    }
+    function redirect4() {
+        window.location.href = '/resultadof2'
+    }
+    function redirect5() {
+        window.location.href = '/resultadof3'
+    }
+
+    myDiv.on('plotly_sunburstclick', function (evt) {
+        MyPlotClick(evt)
+    });
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,206 @@
+{
+    "name": "p1",
+    "children": [
+        {
+            "name": "a1",
+            "children": [
+                {
+                    "name": "p2",
+                    "children": [
+                        {
+                            "name": "a2",
+                            "children": [
+                                {
+                                    "name": "p3",
+                                    "children": [
+                                        {
+                                            "name": "a3"
+                                        },
+                                        {
+                                            "name": "b3"
+                                        },
+                                        {
+                                            "name": "c3"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "b2",
+                            "children": [
+                                {
+                                    "name": "p3",
+                                    "children": [
+                                        {
+                                            "name": "a3"
+                                        },
+                                        {
+                                            "name": "b3"
+                                        },
+                                        {
+                                            "name": "c3"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "c2",
+                            "children": [
+                                {
+                                    "name": "p3",
+                                    "children": [
+                                        {
+                                            "name": "a3"
+                                        },
+                                        {
+                                            "name": "b3"
+                                        },
+                                        {
+                                            "name": "c3"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "b1",
+            "children": [
+                {
+                    "name": "p2",
+                    "children": [
+                        {
+                            "name": "a2",
+                            "children": [
+                                {
+                                    "name": "p3",
+                                    "children": [
+                                        {
+                                            "name": "a3"
+                                        },
+                                        {
+                                            "name": "b3"
+                                        },
+                                        {
+                                            "name": "c3"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "b2",
+                            "children": [
+                                {
+                                    "name": "p3",
+                                    "children": [
+                                        {
+                                            "name": "a3"
+                                        },
+                                        {
+                                            "name": "b3"
+                                        },
+                                        {
+                                            "name": "c3"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "c2",
+                            "children": [
+                                {
+                                    "name": "p3",
+                                    "children": [
+                                        {
+                                            "name": "a3"
+                                        },
+                                        {
+                                            "name": "b3"
+                                        },
+                                        {
+                                            "name": "c3"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "c1",
+            "children": [
+                {
+                    "name": "p2",
+                    "children": [
+                        {
+                            "name": "a2",
+                            "children": [
+                                {
+                                    "name": "p3",
+                                    "children": [
+                                        {
+                                            "name": "a3"
+                                        },
+                                        {
+                                            "name": "b3"
+                                        },
+                                        {
+                                            "name": "c3"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "b2",
+                            "children": [
+                                {
+                                    "name": "p3",
+                                    "children": [
+                                        {
+                                            "name": "a3"
+                                        },
+                                        {
+                                            "name": "b3"
+                                        },
+                                        {
+                                            "name": "c3"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "c2",
+                            "children": [
+                                {
+                                    "name": "p3",
+                                    "children": [
+                                        {
+                                            "name": "a3"
+                                        },
+                                        {
+                                            "name": "b3"
+                                        },
+                                        {
+                                            "name": "c3"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

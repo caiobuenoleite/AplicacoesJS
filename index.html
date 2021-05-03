@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLENI Cuidados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
+        </script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .column {
+            float: left;
+            width: 25%;
+            padding: 0 10px;
+        }
+
+        .row {
+            margin: 0 0 0 10px;
+        }
+
+        .row:after {
+
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 90%;
+                display: block;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Style the counter cards */
+        .card {
+            box-shadow: 0 4px 8px 0 #00e9e3;
+            padding: 16px;
+            text-align: center;
+            background-color: #f1f1f1;
+        }
+
+        body {
+            background-color: #00e9e3;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 50px;
+            margin-top: auto;
+        }
+
+        h2 {
+            color: white;
+            margin-left: 1cm;
+        }
+
+        h3 {
+            color: #fff;
+        }
+
+        p {
+            color: #fff;
+        }
+
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
+
+        /* General Buttons */
+        button {
+            width: 300px;
+            height: 40px;
+            background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+            /* W3C */
+            border: none;
+            border-radius: 5px;
+            position: relative;
+            border-bottom: 4px solid #2b8bc6;
+            color: #fbfbfb;
+            font-weight: 600;
+            font-family: 'Open Sans', sans-serif;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
+            font-size: 15px;
+            text-align: left;
+            text-indent: 5px;
+            box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, .2);
+            cursor: pointer;
+
+            /* Just for presentation */
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+
+        button:active {
+            box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, .2);
+            top: 1px;
+        }
+
+        button:after {
+            content: "";
+            width: 0;
+            height: 0;
+            display: block;
+            border-top: 20px solid #187dbc;
+            border-bottom: 20px solid #187dbc;
+            border-left: 16px solid transparent;
+            border-right: 20px solid #187dbc;
+            position: absolute;
+            opacity: 0.6;
+            right: 0;
+            top: 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* Button pointing left */
+
+        button.back {
+            text-align: right;
+            padding-right: 12px;
+            box-sizing: border-box;
+        }
+
+        button.back:after {
+            content: "";
+            width: 0;
+            height: 0;
+            display: block;
+            border-top: 20px solid #187dbc;
+            border-bottom: 20px solid #187dbc;
+            border-right: 16px solid transparent;
+            border-left: 20px solid #187dbc;
+            position: absolute;
+            opacity: 0.6;
+            left: 0;
+            top: 0;
+            border-radius: 5px 0 0 5px;
+        }
+
+        /* Single buttons */
+
+        button.site {
+            width: 40px;
+            text-align: center;
+            text-indent: 0;
+        }
+
+        button.site:after {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="https://scontent-gru1-1.xx.fbcdn.net/v/t1.6435-9/167493144_123741683103236_569332175966166468_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=e3f864&_nc_ohc=AUFDvodthgYAX_aXQ0H&_nc_ht=scontent-gru1-1.xx&oh=f34f74b9c18834d54286bf1a6768e27f&oe=60953F5A"
+        width="100%" height="100%" alt="Italian Trulli">
+    <div>
+        <h1>Você deu o seu primeiro passo para alcançar uma saúde plena!</h1>
+        <br>
+        <h2>De acordo com suas respostas temos o seguinte prognóstico para você:</h2>
+    </div>
+
+    <div class="row" style="margin-top: 0.75cm;">
+        <div class="column">
+            <div class="card" style="background-color: #00a5a1;">
+                <h3>Resultado do teste 1</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card" style="background-color: #9ecae1;">
+                <h3>Resultado do teste 2</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card" style="background-color: #3182bd;">
+                <h3>Resultado do teste 3</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card" style="background-color: #666666;">
+                <h3>Resultado do teste 4</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 0.75cm;">
+        <div class="column" style="width: 50%;">
+            <h3>Lorem Ipsum</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+                into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+                software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        </div>
+        <div class="column" style="width: 50%;">
+            <img src="https://scontent-gru1-2.xx.fbcdn.net/v/t1.6435-9/154974006_105783214899083_5012639764501935667_n.png?_nc_cat=108&ccb=1-3&_nc_sid=e3f864&_nc_ohc=Q2Yq17ipJrcAX8XZUEy&_nc_ht=scontent-gru1-2.xx&oh=0c11b61e2ae90eef05f43d5eb457e12a&oe=6095539F"
+                alt="teste" width="100%">
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <button class="button">Venha fazer parte!</button>
+    </div>
+
+    <img src="https://scontent.fsdu18-1.fna.fbcdn.net/v/t1.6435-9/167496351_124498793027525_5900450405844570200_n.png?_nc_cat=108&ccb=1-3&_nc_sid=9267fe&_nc_ohc=-Ou_0g7yaqkAX-52mCa&_nc_ht=scontent.fsdu18-1.fna&oh=536a01ae05292eb3bfabf34d05fea8c9&oe=6096198F"
+        width="100%" height="100%" alt="Italian Trulli2">
+
+</body>
+
+</html>

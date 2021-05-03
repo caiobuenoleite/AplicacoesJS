@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SunBurst</title>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <style>
+        .js-plotly-plot .plotly svg a {
+            fill: rgb(230 234 241);
+        }
+
+        h1 {
+            font-family: montserrat, sans-serif;
+            color: #31aeb5;
+            text-align: center !important;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        Qual nível de Plenitude com a sua saúde?
+    </h1>
+    <div id="myDiv"></div>
+</body>
+<script>
+    var data = [{
+        type: "sunburst",
+        ids: [
+            'P1',
+            'P1-A',
+            'P1-B',
+            'P1-C',
+            'P2',
+            'P2',
+            'P2'
+        ],
+        labels: [
+            'Quantas vezes você <br>costuma ir ao <br>médico por ano?',
+            '2x ou mais/ano',
+            '1x/ano',
+            'Só quando preciso'
+        ],
+        parents: [
+            "",
+            'P1',
+            'P1',
+            'P1',
+            'P1-A',
+            'P1-B',
+            'P1-C'
+        ],
+        outsidetextfont: { size: 20, color: "#000" },
+        insidetextfont: { color: "#FFF", size: 20 },
+        leaf: { opacity: 0.4 },
+        marker: {
+            line: { width: 5 },
+        },
+        maxdepth: 2,
+        insidetextorientation: 'horizontal'
+    }];
+    var layout = {
+        margin: { l: 0, r: 0, b: 0, t: 0 },
+        sunburstcolorway: ["#00a5a1", "#666666", "#3182bd", "#00e9e3", "#e6550d", "#9ecae1", "#fdae6b", "#9ecae1",
+            "#fdae6b", "#deebf7", "#deebf7", "#deebf7", "#fee6ce"],
+        font: {
+            // family: 'font-family:questrial,sans-serif',
+        },
+        transition: {
+            duration: 100,
+        }
+        // width: 500,
+        // height: 500
+    };
+
+    var i = 0;
+    var valorScore = 0
+    var lastClicked = 0;
+    Plotly.newPlot('myDiv', data, layout, { displayModeBar: false })
+
+    function MyPlotClick(evt) {
+        if (evt.points[0].pointNumber === 0) {
+        } else {
+            valorScore = valorScore + evt.points[0].pointNumber
+            var timeNow = (new Date()).getTime()
+            if (timeNow > (lastClicked + 1000)) {
+                if (i === 0) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+                        var data2 = [{
+                            type: "sunburst",
+                            ids: [
+                                'P2',
+                                'P2-A',
+                                'P2-B',
+                                'P2-C',
+                                'P3',
+                                'P3',
+                                'P3',
+                            ],
+                            labels: [
+                                'Quantos médicos você <br>precisa para cuidar <br>da sua saúde integral <br>(ex: dermatologista, <br>ginecologista,<br> cardiologista)?',
+                                '1 médico',
+                                '1 a 2 <br>médicos',
+                                'mais de 2 médicos'
+                            ],
+                            parents: [
+                                "",
+                                'P2',
+                                'P2',
+                                'P2',
+                                'P2-A',
+                                'P2-B',
+                                'P2-C',
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal',
+                        }];
+                        Plotly.newPlot('myDiv', data2, layout, { displayModeBar: false })
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 1) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+
+                        var data3 = [{
+                            type: "sunburst",
+                            ids: [
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                                'P4',
+                                'P4',
+                                'P4',
+                            ],
+                            labels: [
+                                'Quanto tempo você <br>costuma demorar para <br>conseguir uma consulta?',
+                                '15 dias',
+                                '15 dias a <br>1 mês',
+                                'mais de 1 mês'
+                            ],
+                            parents: [
+                                '',
+                                'P3',
+                                'P3',
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal',
+                        }];
+                        Plotly.newPlot('myDiv', data3, layout, { displayModeBar: false });
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 2) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+
+                        var data3 = [{
+                            type: "sunburst",
+                            ids: [
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                                'P4',
+                                'P4',
+                                'P4',
+                            ],
+                            labels: [
+                                'Quantas vezes você <br>vai ao médico somente <br>para renovar receita <br>ou mostrar exame?',
+                                'Nunca',
+                                'As vezes',
+                                'Quase sempre'
+                            ],
+                            parents: [
+                                '',
+                                'P3',
+                                'P3',
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal',
+                        }];
+                        Plotly.newPlot('myDiv', data3, layout, { displayModeBar: false });
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 3) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+
+                        var data3 = [{
+                            type: "sunburst",
+                            ids: [
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                                'P4',
+                                'P4',
+                                'P4',
+                            ],
+                            labels: [
+                                'Com quem frequência <br>você costuma perder <br>as suas receitas?',
+                                'Nunca',
+                                'As vezes',
+                                'Quase sempre'
+                            ],
+                            parents: [
+                                '',
+                                'P3',
+                                'P3',
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal',
+                        }];
+                        Plotly.newPlot('myDiv', data3, layout, { displayModeBar: false });
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 4) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+
+                        var data3 = [{
+                            type: "sunburst",
+                            ids: [
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                                'P4',
+                                'P4',
+                                'P4',
+                            ],
+                            labels: [
+                                'Quanto tempo você <br>gasta em salas de <br>espera para atendimento?',
+                                '30 minutos',
+                                '30 min.<br> à 1 hora',
+                                'Mais de 1 hora'
+                            ],
+                            parents: [
+                                '',
+                                'P3',
+                                'P3',
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal',
+                        }];
+                        Plotly.newPlot('myDiv', data3, layout, { displayModeBar: false });
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 5) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+
+                        var data3 = [{
+                            type: "sunburst",
+                            ids: [
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                                'P4',
+                                'P4',
+                                'P4',
+                            ],
+                            labels: [
+                                'Algum médico ou equipe <br>de saúde já entrou <br>em contato com você <br>para saber como estava?',
+                                'Sempre',
+                                'Ás vezes',
+                                'Nunca'
+                            ],
+                            parents: [
+                                '',
+                                'P3',
+                                'P3',
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal',
+                        }];
+                        Plotly.newPlot('myDiv', data3, layout, { displayModeBar: false });
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 6) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+
+                        var data3 = [{
+                            type: "sunburst",
+                            ids: [
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                                'P3-D',
+                                'P4',
+                                'P4',
+                                'P4',
+                                'P4'
+                            ],
+                            labels: [
+                                'Que diferença faria <br>ter até 4 consultas <br>por mês com um Médico <br>pelo mesmo preço?',
+                                'Sim',
+                                'Talvez',
+                                'Não',
+                                'Não saberia <br>responder'
+                            ],
+                            parents: [
+                                '',
+                                'P3',
+                                'P3',
+                                'P3',
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                                'P3-D'
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal',
+                        }];
+                        Plotly.newPlot('myDiv', data3, layout, { displayModeBar: false });
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 7) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+
+                        var data3 = [{
+                            type: "sunburst",
+                            ids: [
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                                'P3-D',
+                                'P4',
+                                'P4',
+                                'P4',
+                                'P4'
+                            ],
+                            labels: [
+                                'No seu caso, <br>faz sentido resolver até 85% <br>dos possíveis problemas de saúde <br>economizando 90% do <br>que gasta hoje?',
+                                'Sim',
+                                'Talvez',
+                                'Não',
+                                'Não saberia <br>responder'
+                            ],
+                            parents: [
+                                '',
+                                'P3',
+                                'P3',
+                                'P3',
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                                'P3-D'
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal',
+                        }];
+                        Plotly.newPlot('myDiv', data3, layout, { displayModeBar: false });
+                        myDiv.on('plotly_click', MyPlotClick);
+                    }, 1000);
+                } else if (i === 8) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+
+                        var data3 = [{
+                            type: "sunburst",
+                            ids: [
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                                'P3-D',
+                                'P4',
+                                'P4',
+                                'P4',
+                                'P4'
+                            ],
+                            labels: [
+                                'Você gostaria de ter uma <br>jornada de saúde <br>acompanhada pelo médico,<br> enfermeiro e técnico <br>mais uma equipe <br>de orientação 24h <br>todos os dias do ano?',
+                                'Sim',
+                                'Talvez',
+                                'Não',
+                                'Não saberia <br>responder',
+                                'Venha saber mais',
+                                'Venha saber mais',
+                                'Venha saber mais',
+                                'Venha saber mais'
+                            ],
+                            parents: [
+                                '',
+                                'P3',
+                                'P3',
+                                'P3',
+                                'P3',
+                                'P3-A',
+                                'P3-B',
+                                'P3-C',
+                                'P3-D'
+                            ],
+                            outsidetextfont: { size: 20, color: "#000" },
+                            insidetextfont: { color: "#FFF", size: 20 },
+                            leaf: { opacity: 0.4 },
+                            marker: {
+                                line: { width: 5 },
+                            },
+                            maxdepth: 2,
+                            insidetextorientation: 'horizontal',
+                        }];
+                        Plotly.newPlot('myDiv', data3, layout, { displayModeBar: false });
+                        myDiv.on('plotly_click', MyPlotClick);
+                        document.getElementById('myDiv').setAttribute('href', '/pdf')
+                    }, 1000);
+                } else if (i === 9) {
+                    setTimeout(() => {
+                        // alert(valorScore)
+
+                        redirect()
+                    }, 1000);
+                }
+                i = i + 1;
+            } else {
+                alert('Please wait at least 2 seconds between clicks!');
+            }
+
+            lastClicked = timeNow;
+        }
+
+    }
+
+
+    function redirect() {
+        window.location.href = '/pdf'
+    }
+
+    myDiv.on('plotly_sunburstclick', function (evt) {
+        MyPlotClick(evt)
+    });
+
+
+
+</script>
+
+</html>

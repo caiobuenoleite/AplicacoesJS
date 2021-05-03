@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    path {
+        stroke: #fff;
+    }
+</style>
+
+<body>
+    <div id="main"></div>
+
+
+
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script>
+        var width = 500,
+            height = 500,
+            radius = Math.min(width, height) / 2;
+
+        var x = d3.scale.linear()
+            .range([0, 2 * Math.PI]);
+
+        var y = d3.scale.sqrt()
+            .range([0, radius]);
+
+        var color = d3.scale.category10();
+
+        var svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ") rotate(-90 0 0)");
+
+        var partition = d3.layout.partition()
+            .value(function (d) {
+                return d.size;
+            });
+
+        var arc = d3.svg.arc()
+            .startAngle(function (d) {
+                return Math.max(0, Math.min(2 * Math.PI, x(d.x)));
+            })
+            .endAngle(function (d) {
+                return Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx)));
+            })
+            .innerRadius(function (d) {
+                return Math.max(0, y(d.y));
+            })
+            .outerRadius(function (d) {
+                return Math.max(0, y(d.y + d.dy));
+            });
+
+        //d3.json("/d/4063550/flare.json", function(error, root) {
+        var root = getData();
+
+        var g = svg.selectAll("g")
+            .data(partition.nodes(root))
+            .enter().append("g");
+
+        var path = g.append("path")
+            .attr("d", arc)
+            .style("fill", function (d) {
+                return color((d.children ? d : d.parent).name);
+            })
+            .on("click", click);
+
+        //.append("text")
+        var text = g.append("text")
+            .attr("x", function (d) {
+                return y(d.y);
+            })
+            .attr("dx", "6") // margin
+            .attr("dy", ".35em") // vertical-align
+            .attr("transform", function (d) {
+                return "rotate(" + computeTextRotation(d) + ")";
+            })
+            .text(function (d) {
+                return d.name;
+            })
+            .style("fill", "white");
+
+        function computeTextRotation(d) {
+            var angle = x(d.x + d.dx / 2) - Math.PI / 2;
+            return angle / Math.PI * 180;
+        }
+
+        //text.attr("transform", function (d) {
+        //    return "rotate(" + computeTextRotation(d) + ")";
+        //});
+
+
+
+        /*
+        var label = g.append("rect")
+        .attr("x", function(d) { return x(d.x) })
+        .attr("y", function(d) { return y(d.y) })
+        .attr("width", function(d) { return 100 })
+        .attr("height", function(d) { return 100 })
+        .attr("transform", function (d) {
+            return "rotate(" + computeTextRotation(d) + ")";
+        })
+        .attr("style", "fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9");
+        */
+
+        function click(d) {
+            // fade out all text elements
+            if (d.size !== undefined) {
+                d.size += 100;
+            };
+            text.transition().attr("opacity", 0);
+
+            path.transition()
+                .duration(750)
+                .attrTween("d", arcTween(d))
+                .each("end", function (e, i) {
+                    // check if the animated element's data e lies within the visible angle span given in d
+                    if (e.x >= d.x && e.x < (d.x + d.dx)) {
+                        // get a selection of the associated text element
+                        var arcText = d3.select(this.parentNode).select("text");
+                        // fade in the text element and recalculate positions
+                        arcText.transition().duration(750)
+                            .attr("opacity", 1)
+                            .attr("transform", function () {
+                                return "rotate(" + computeTextRotation(e) + ")"
+                            })
+                            .attr("x", function (d) {
+                                return y(d.y);
+                            });
+                    }
+                });
+        } //});
+
+        // Word wrap!
+        var insertLinebreaks = function (t, d, width) {
+            alert(0)
+            var el = d3.select(t);
+            var p = d3.select(t.parentNode);
+            p.append("g")
+                .attr("x", function (d) {
+                    return y(d.y);
+                })
+                //    .attr("dx", "6") // margin
+                //.attr("dy", ".35em") // vertical-align
+                .attr("transform", function (d) {
+                    return "rotate(" + computeTextRotation(d) + ")";
+                })
+                //p
+                .append("foreignObject")
+                .attr('x', -width / 2)
+                .attr("width", width)
+                .attr("height", 200)
+                .append("xhtml:p")
+                .attr('style', 'word-wrap: break-word; text-align:center;')
+                .html(d.name);
+            alert(1)
+            el.remove();
+            alert(2)
+        };
+
+        //g.selectAll("text")
+        //    .each(function(d,i){ insertLinebreaks(this, d, 50 ); });
+
+
+        d3.select(self.frameElement).style("height", height + "px");
+
+        // Interpolate the scales!
+        function arcTween(d) {
+            var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
+                yd = d3.interpolate(y.domain(), [d.y, 1]),
+                yr = d3.interpolate(y.range(), [d.y ? 20 : 0, radius]);
+            return function (d, i) {
+                return i ? function (t) {
+                    return arc(d);
+                } : function (t) {
+                    x.domain(xd(t));
+                    y.domain(yd(t)).range(yr(t));
+                    return arc(d);
+                };
+            };
+        }
+
+        function getData() {
+            return {
+                "name": "Main", "isMain": "true", "systemName": "Main/Home",
+                "children": [
+
+                    {
+                        "name": "Amy", "isMain": "false", "systemName": "Amy/Home",
+                        "children": [
+
+                            {
+                                "name": "Amy 1", "isMain": "false", "systemName": "Amy-1/Home",
+                                "children": [
+
+                                    { "name": "amy 1.1", "isMain": "false", "systemName": "amy-1-1/Home", "size": 100 }]
+
+                            }]
+
+                    },
+                    {
+                        "name": "Bender", "isMain": "false", "systemName": "Bender/Home",
+                        "children": [
+
+                            {
+                                "name": "bender 1", "isMain": "false", "systemName": "bender-1/Home",
+                                "children": [
+
+                                    { "name": "bender 1.1", "isMain": "false", "systemName": "bender-1-1/Home", "size": 100 }]
+
+                            }]
+
+                    },
+                    {
+                        "name": "Chris Audience", "isMain": "false", "systemName": "ChrisAudience/Home",
+                        "children": [
+
+                            { "name": "TestAudience", "isMain": "false", "systemName": "TestAudience/Home", "size": 100 },
+                            { "name": "TestAudience2", "isMain": "false", "systemName": "TestAudience2/Home", "size": 100 }]
+
+                    },
+                    {
+                        "name": "Fry", "isMain": "false", "systemName": "Fry/Home",
+                        "children": [
+
+                            {
+                                "name": "Fry 1", "isMain": "false", "systemName": "Fry-1/Home",
+                                "children": [
+
+                                    { "name": "Fry 1.1", "isMain": "false", "systemName": "Fry-1-1/Home", "size": 100 }]
+
+                            }]
+
+                    },
+                    { "name": "Hermes", "isMain": "false", "systemName": "Hermes/Home", "size": 100 },
+                    {
+                        "name": "John Audience", "isMain": "false", "systemName": "JohnAudience/Home",
+                        "children": [
+
+                            {
+                                "name": "Ben", "isMain": "false", "systemName": "Ben/Home",
+                                "children": [
+
+                                    { "name": "Obiwan", "isMain": "false", "systemName": "Obiwan/Home", "size": 100 }]
+
+                            },
+                            {
+                                "name": "Luke", "isMain": "false", "systemName": "Luke/Home",
+                                "children": [
+
+                                    { "name": "Skywalker", "isMain": "false", "systemName": "Skywalker/Home", "size": 100 }]
+
+                            },
+                            {
+                                "name": "Peter", "isMain": "false", "systemName": "Peter/Home",
+                                "children": [
+
+                                    { "name": "Parker", "isMain": "false", "systemName": "Parker/Home", "size": 100 },
+                                    { "name": "Rasputen", "isMain": "false", "systemName": "Rasputen/Home", "size": 100 }]
+
+                            }]
+
+                    },
+                    { "name": "Leela", "isMain": "false", "systemName": "Leela/Home", "size": 100 },
+                    {
+                        "name": "Not Merica", "isMain": "false", "systemName": "NotMerica/Home",
+                        "children": [
+
+                            {
+                                "name": "Europe", "isMain": "false", "systemName": "Europe/Home",
+                                "children": [
+
+                                    { "name": "France", "isMain": "false", "systemName": "France/Home", "size": 100 }]
+
+                            }]
+
+                    },
+                    { "name": "Professor", "isMain": "false", "systemName": "Professor/Home", "size": 100 },
+                    {
+                        "name": "Vlad Audience", "isMain": "false", "systemName": "Vlad-Audience/Home",
+                        "children": [
+
+                            {
+                                "name": "vlad 1", "isMain": "false", "systemName": "vlad-1/Home",
+                                "children": [
+
+                                    { "name": "vlad 1.1", "isMain": "false", "systemName": "vlad-1-1/Home", "size": 100 }]
+
+                            }]
+
+                    },
+                    {
+                        "name": "Why Not Zoidberg Audience", "isMain": "false", "systemName": "WhyNotZoidbergAudience/Home",
+                        "children": [
+
+                            {
+                                "name": "Zoidberg 1", "isMain": "false", "systemName": "Zoidberg-1/Home",
+                                "children": [
+
+                                    { "name": "Zoidberg 1.1", "isMain": "false", "systemName": "Zoidberg-1-1/Home", "size": 100 }]
+
+                            }]
+
+                    },
+                    {
+                        "name": "Zap", "isMain": "false", "systemName": "Zap/Home",
+                        "children": [
+
+                            {
+                                "name": "Zap 1", "isMain": "false", "systemName": "Zap1/Home",
+                                "children": [
+
+                                    { "name": "Zap 1.1", "isMain": "false", "systemName": "Zap-1-1/Home", "size": 100 }]
+
+                            }]
+
+                    }]
+
+            };
+        }
+    </script>
